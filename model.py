@@ -23,6 +23,8 @@ class Brand(db.Model):
     headquarters = db.Column(db.String(50))
     discontinued = db.Column(db.Integer)
 
+    models = db.relationship('Model', back_populates='brand')
+
     def __repr__(self):
         return f"<Brand Id = {self.brand_id} name = {self.name}>"
 
@@ -37,6 +39,8 @@ class Model(db.Model):
     year = db.Column(db.Integer, nullable=False)
     brand_id = db.Column(db.String(5), db.ForeignKey('brands.brand_id'))
     name = db.Column(db.String(50), nullable=False)
+
+    brand = db.relationship('Brand', back_populates='models')
 
     def __repr__(self):
         return f"<Model Id = {self.model_id} name = {self.name}>"
